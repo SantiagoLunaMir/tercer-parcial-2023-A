@@ -15,9 +15,8 @@ public class Exercise1ShoppingCartTest {
     @Test
     public void givenAnEmptyShoppingCart_whenAnItemIsAdded_thenSizeIsOneAndTotalCostIsCorrect() {
         // Given:
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         ShoppingItem item = shoppingItemCatalog.getItem("ABC1000");
-
         // When:
         shoppingCart.add("ABC1000");
         int totalCost = shoppingCart.getTotalCostInCents();
@@ -37,7 +36,7 @@ public class Exercise1ShoppingCartTest {
     @Test
     public void givenShoppingCartWithItems_whenAnItemIsAdded_thenSizeIncreases() {
         // Given:
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         ShoppingItem item1 = shoppingItemCatalog.getItem("ABC4000");
         ShoppingItem item2 = shoppingItemCatalog.getItem("ABC4001");
         ShoppingItem item3 = shoppingItemCatalog.getItem("ABC4002");
@@ -63,7 +62,7 @@ public class Exercise1ShoppingCartTest {
     @Test
     public void givenShoppingCartWithItems_whenAnItemIsAddedMultipleTimes_thenSizeIncreases() {
         // Given:
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         ShoppingItem item1 = shoppingItemCatalog.getItem("ABC3000");
         ShoppingItem item2 = shoppingItemCatalog.getItem("ABC3000");
         ShoppingItem item3 = shoppingItemCatalog.getItem("ABC3000");
@@ -89,7 +88,7 @@ public class Exercise1ShoppingCartTest {
     @Test
     public void givenShoppingCartWithItems_whenItemsAddedMultipleTimes_thenSizeIncreases() {
         // Given:
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         ShoppingItem item1 = shoppingItemCatalog.getItem("ABC3000");
         ShoppingItem item2 = shoppingItemCatalog.getItem("ABC4000");
 

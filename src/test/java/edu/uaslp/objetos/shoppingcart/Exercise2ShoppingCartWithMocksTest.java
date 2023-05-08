@@ -19,9 +19,8 @@ public class Exercise2ShoppingCartWithMocksTest {
     public void givenAnEmptyShoppingCart_whenAnItemIsAdded_thenSizeIsOneAndTotalCostIsCorrect() {
         // Given:
         ShoppingItemCatalog shoppingItemCatalog = Mockito.mock(ShoppingItemCatalog.class);
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         String itemCode = "9785";
-
         when(shoppingItemCatalog.getItem(itemCode)).thenReturn(new ShoppingItem("Prueba", "Item de prueba", itemCode, 74150));
 
         // When:
@@ -49,7 +48,7 @@ public class Exercise2ShoppingCartWithMocksTest {
     public void givenAShoppingCart_whenItemNotFound_thenExceptionIsThrown() {
         // Given:
         ShoppingItemCatalog shoppingItemCatalog = Mockito.mock(ShoppingItemCatalog.class);
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         String itemCode = "9785";
 
         when(shoppingItemCatalog.getItem(itemCode)).thenThrow(new ItemNotFoundException("Item with code 9785 not found"));
@@ -80,7 +79,7 @@ public class Exercise2ShoppingCartWithMocksTest {
     public void testObjectsComparison() {
         // Given:
         ShoppingItemCatalog shoppingItemCatalog = Mockito.mock(ShoppingItemCatalog.class);
-        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog);
+        ShoppingCart shoppingCart = new ShoppingCart(shoppingItemCatalog, shoppingItemList, totalCost, distinctItemsCount, totalItemsCount);
         String itemCode = "9785";
         ShoppingItem itemFromCatalog = new ShoppingItem("Prueba", "Item de prueba", itemCode, 74150);
         ShoppingItem itemFromShoppingCart = new ShoppingItem("Prueba", "Item de prueba", itemCode, 74150);
