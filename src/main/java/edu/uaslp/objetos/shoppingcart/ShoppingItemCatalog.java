@@ -7,7 +7,7 @@ public class ShoppingItemCatalog {
 
     private final Map<String, ShoppingItem> catalog;
 
-    public ShoppingItemCatalog(){
+    public ShoppingItemCatalog(){//
         catalog = new HashMap<>();
         buildCatalog();
     }
