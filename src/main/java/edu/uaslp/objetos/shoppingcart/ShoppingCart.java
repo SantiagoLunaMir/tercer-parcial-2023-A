@@ -10,6 +10,9 @@ public class ShoppingCart {
     private int totalCost;
     private int distinctItemsCount;
     private int totalItemsCount;
+    public ShoppingCart(){
+
+    }
     public ShoppingCart(ShoppingItemCatalog shoppingItemCatalog, List<ShoppingItem> shoppingItemList, int totalCost, int distinctItemsCount, int totalItemsCount) {
         this.shoppingItemCatalog=shoppingItemCatalog;
         this.shoppingItemList = shoppingItemList;

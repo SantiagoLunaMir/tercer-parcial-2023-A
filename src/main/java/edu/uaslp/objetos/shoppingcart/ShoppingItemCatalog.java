@@ -32,7 +32,6 @@ public class ShoppingItemCatalog {
         if(catalog.containsKey(code)){
             return catalog.get(code);
         }
-
         return null;
     }
 
