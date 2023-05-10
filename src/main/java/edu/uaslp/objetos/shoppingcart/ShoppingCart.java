@@ -1,59 +1,55 @@
 package edu.uaslp.objetos.shoppingcart;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class ShoppingCart {
-    private ShoppingItemCatalog shoppingItemCatalog;
-    private List<ShoppingItem> shoppingItemList;
-    private int totalCost;
-    private int distinctItemsCount;
-    private int totalItemsCount;
-    public ShoppingCart(){
-
-    }
-    public ShoppingCart(ShoppingItemCatalog shoppingItemCatalog, List<ShoppingItem> shoppingItemList, int totalCost, int distinctItemsCount, int totalItemsCount) {
+    private final ShoppingItemCatalog shoppingItemCatalog;
+    private List<ShoppingItem> items=new LinkedList<>();
+    public ShoppingCart(ShoppingItemCatalog shoppingItemCatalog){
         this.shoppingItemCatalog=shoppingItemCatalog;
-        this.shoppingItemList = shoppingItemList;
-        this.totalCost = totalCost;
-        this.distinctItemsCount = distinctItemsCount;
-        this.totalItemsCount = totalItemsCount;
+    }
+    public void add(String code){
+        items.add(shoppingItemCatalog.getItem(code));
     }
 
-    public void setTotalCost(int totalCost){
-        this.totalCost=totalCost;
+    public int getTotalCostInCents() {
+        int totalCost=0;
+        for(ShoppingItem item:items){
+            totalCost+=item.getUnitCostInCents();
+        }
+        return totalCost;
     }
-    public void setDistinctItemsCount(int distinctItemsCount) {
-        this.distinctItemsCount = distinctItemsCount;
+    public int getDistinctItemsCount() {
+        Collection<ShoppingItem> distinctItems=getDistinctItems();
+        return distinctItems.size();
     }
-
-    public void setTotalItemsCount(int totalItemsCount) {
-        this.totalItemsCount = totalItemsCount;
-    }
-    public void setShoppingItemCatalog(List<ShoppingItem> shoppingItemList){
-        this.shoppingItemList=shoppingItemList;
-
-    }
-    public void add(String itemCode){
-        ShoppingItem item1=shoppingItemCatalog.getItem(itemCode);
-        shoppingItemList.add(item1);
-    }
-    public int getTotalCostInCents(){
-        return 0;
-    }
-    public int getDistinctItemsCount(){
-        return 0;
-    }
-    public int getTotalItemsCount(){
-        return 0;
-    }
-    public List<ShoppingItem> getItems(){
-        return null;
-    }
-    public Collection<ShoppingItem> getDistinctItems(){
-        return null;
+    private boolean itemIsPresent(ShoppingItem itemFind,List<ShoppingItem> distinctItems){
+        for(ShoppingItem item:distinctItems){
+            if(itemFind.getCode().equals(item.getCode())){
+                return true;
+            }
+        }
+        return false;
     }
 
+    public int getTotalItemsCount() {
+        return items.size();
+    }
 
+    public List<ShoppingItem> getItems() {
+        return items;
+    }
+
+    public Collection<ShoppingItem> getDistinctItems() {
+        List<ShoppingItem> distinctItems=new LinkedList<>();
+        for(ShoppingItem item:items){
+            if(!itemIsPresent(item,distinctItems)){
+                distinctItems.add(item);
+            }
+        }
+        return distinctItems;
+    }
 }
